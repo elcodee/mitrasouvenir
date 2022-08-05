@@ -22,7 +22,7 @@ export default function PopUpModal() {
       >
         <Modal.Header>
           <Text id="modal-title" size={18}>
-            Welcome Mitra Souvenir
+            Welcome To Mitra Souvenir
           </Text>
         </Modal.Header>
         <Modal.Body>

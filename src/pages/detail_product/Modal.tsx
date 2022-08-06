@@ -28,6 +28,7 @@ export default function PopUpModal() {
       <Modal
         scroll
         preventClose
+        blur
         width="600px"
         aria-labelledby="modal-title"
         aria-describedby="modal-description"

@@ -1,6 +1,6 @@
 import { Modal, useModal, Button, Text } from "@nextui-org/react";
 import { useEffect } from "react";
-import { AiOutlineWhatsApp, AiOutlineInstagram, AiOutlineShopping, AiOutlineShop, AiOutlineEdit, AiOutlineFileText } from "react-icons/ai";
+import { AiOutlineWhatsApp, AiOutlineInstagram, AiOutlineShoppingCart, AiOutlineShop, AiOutlineEdit, AiOutlineFileText } from "react-icons/ai";
 
 export default function PopUpModal() {
   const { setVisible, bindings } = useModal();
@@ -14,6 +14,8 @@ export default function PopUpModal() {
     <div>
       <Modal
         scroll
+        preventClose
+        blur
         width="600px"
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
@@ -32,10 +34,10 @@ export default function PopUpModal() {
         <Button color="gradient" icon={<AiOutlineInstagram fontSize={20} />} auto>
           Instagram
         </Button>
-        <Button color="gradient" icon={<AiOutlineShopping fontSize={20} />} auto>
+        <Button color="gradient" icon={<AiOutlineShoppingCart fontSize={20} />} auto>
           Shopee
         </Button>
-        <Button color="gradient" icon={<AiOutlineShopping fontSize={20} />} auto>
+        <Button color="gradient" icon={<AiOutlineShoppingCart fontSize={20} />} auto>
           Tokopedia
         </Button>
         <Button color="gradient" icon={<AiOutlineShop fontSize={20} />} auto>
@@ -43,9 +45,6 @@ export default function PopUpModal() {
         </Button>
         <Button color="gradient" icon={<AiOutlineEdit fontSize={20} />} auto>
           Custome
-        </Button>
-        <Button color="gradient" icon={<AiOutlineFileText fontSize={20} />} auto>
-          Catalog
         </Button>
         </Modal.Body>
         <Modal.Footer>

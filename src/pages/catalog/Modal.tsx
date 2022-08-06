@@ -7,8 +7,8 @@ export default function PopUpModal() {
 
   useEffect(() => {
     setTimeout(() => {
-        setVisible(true);
-    }, 1500);
+        // setVisible(true);
+    }, 2000);
   }, [])
   return (
     <div>

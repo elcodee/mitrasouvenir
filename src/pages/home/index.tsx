@@ -40,7 +40,7 @@ export default function HomePage() {
                     </p>
                   </div>
                   <a
-                    href="/product"
+                    href="/catalog"
                     className="btn btn-secondary rounded bg-hover-primary border-0"
                     data-animate="fadeInUp"
                   >
@@ -75,7 +75,7 @@ export default function HomePage() {
                     </p>
                   </div>
                   <a
-                    href="/product"
+                    href="/catalog"
                     className="btn btn-secondary rounded bg-hover-primary border-0"
                     data-animate="fadeInUp"
                   >
@@ -111,7 +111,7 @@ export default function HomePage() {
                     </p>
                   </div>
                   <a
-                    href="/product"
+                    href="/catalog"
                     className="btn btn-secondary rounded bg-hover-primary border-0"
                     data-animate="fadeInUp"
                   >

@@ -1,12 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/home';
-import ProductPage from './pages/product';
+import DetailProductPage from './pages/detail_product';
+import CatalogPage from './pages/catalog';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/product" element={<ProductPage />} />
+      <Route path="/catalog" element={<CatalogPage />} />
+      <Route path="/product" element={<DetailProductPage />} />
     </Routes>
   );
 }

@@ -45,7 +45,7 @@ export default function Header() {
                     <div className="d-flex mt-3 mt-xl-0 align-items-center w-100 justify-content-center">
                       <a
                         className="navbar-brand mx-auto d-inline-block py-0"
-                        href="index.html"
+                        href="/"
                       >
                         <img
                           src="https://files.elcodee.com/mitrasouvenir/images/logo-black.png"

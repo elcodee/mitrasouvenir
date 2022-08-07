@@ -1,19 +1,68 @@
 import React from "react";
-import { Modal, Input, Button, Text } from "@nextui-org/react";
-import { AiOutlineMail, AiOutlineKey } from "react-icons/ai";
+import { Modal, Input, Button, Text, Loading } from "@nextui-org/react";
+import { AiOutlineMail, AiOutlineKey, AiOutlineWarning } from "react-icons/ai";
 
 export default function LoginModal() {
   const [visible, setVisible] = React.useState(false);
+  const [loadingComp, setLoadingComp] = React.useState(false);
+  const [err, setErr] = React.useState({
+    is: false,
+    msg: "",
+  });
+  const [inputs, setInputs] = React.useState({
+    email: "",
+    password: "",
+  });
+
   const handler = () => setVisible(true);
+
   const closeHandler = () => {
     setVisible(false);
     console.log("closed");
   };
+
+  const inputsHandler = (e: any) => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const loginHandler = () => {
+    if (inputs.email === "user@mail.com" && inputs.password === "admin123") {
+      setLoadingComp(true);
+
+      setTimeout(() => {
+        window.open("https://mitrasouvenir-admin.vercel.app/", "tab");
+        setLoadingComp(false);
+        setVisible(false);
+      }, 2000);
+
+      console.log("CORRECT INPUT : ", inputs);
+    } else {
+        setLoadingComp(true);
+
+        setTimeout(() => {
+        setErr({
+          is: true,
+          msg: "Email Atau Password Salah",
+        });
+
+        setTimeout(() => {
+          setErr({
+            is: false,
+            msg: "",
+          });
+        }, 5000);
+        setLoadingComp(false);
+      }, 2000);
+
+      console.log("ERR INPUT : ", inputs);
+    }
+  };
+
   return (
     <div>
-      {/* <Button auto color="warning" shadow onClick={handler}>
-        Open modal
-      </Button> */}
       <svg className="icon icon-user-light fs-28" onClick={handler}>
         <use xlinkHref="#icon-user-light" />
       </svg>
@@ -32,6 +81,15 @@ export default function LoginModal() {
           </Text>
         </Modal.Header>
         <Modal.Body>
+          {err.is ? (
+            <div
+              className="alert alert-danger d-flex align-items-center"
+              role="alert"
+            >
+              <AiOutlineWarning fontSize={30} style={{ marginRight: 15 }} />
+              <div>{err.msg}</div>
+            </div>
+          ) : null}
           <Input
             clearable
             bordered
@@ -40,7 +98,11 @@ export default function LoginModal() {
             size="lg"
             type="email"
             placeholder="Email"
-            contentLeft={<AiOutlineMail  />}
+            name="email"
+            onChange={(e) => {
+              inputsHandler(e);
+            }}
+            contentLeft={<AiOutlineMail />}
           />
           <Input
             clearable
@@ -50,13 +112,23 @@ export default function LoginModal() {
             size="lg"
             type="password"
             placeholder="Password"
+            name="password"
+            onChange={(e) => {
+              inputsHandler(e);
+            }}
             contentLeft={<AiOutlineKey />}
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button auto onClick={closeHandler}>
-            Login
-          </Button>
+          {loadingComp ? (
+            <Button disabled auto bordered color="primary" css={{ px: "$13" }}>
+              <Loading color="currentColor" size="sm" />
+            </Button>
+          ) : (
+            <Button auto onClick={loginHandler}>
+              Login
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     </div>

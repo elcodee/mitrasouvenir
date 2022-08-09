@@ -60,14 +60,12 @@ export default function Header() {
                         <li className="nav-item">
                           <a
                             className="nav-link pr-3 py-0"
-                            href="#"
-                            data-toggle="modal"
-                            data-target="#sign-in"
+                            href="https://mitrasouvenir-admin.vercel.app"
                           >
-                            {/* <svg className="icon icon-user-light">
+                            <svg className="icon icon-user-light">
                               <use xlinkHref="#icon-user-light" />
-                            </svg> */}
-                            <LoginModal />
+                            </svg>
+                            {/* <LoginModal /> */}
                           </a>
                         </li>
                       </ul>

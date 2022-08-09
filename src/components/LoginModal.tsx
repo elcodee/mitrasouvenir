@@ -29,16 +29,16 @@ export default function LoginModal() {
   };
 
   const loginHandler = () => {
-    if (inputs.email === "user@mail.com" && inputs.password === "admin123") {
+    if (inputs.email === "admin@gmail.com" && inputs.password === "admin123") {
       setLoadingComp(true);
 
       setTimeout(() => {
-        window.open("https://mitrasouvenir-admin.vercel.app/", "tab");
+        window.open("https://mitrasouvenir-admin.vercel.app/");
         setLoadingComp(false);
         setVisible(false);
       }, 2000);
 
-      console.log("CORRECT INPUT : ", inputs);
+      console.log("CORRECT DATA : ", inputs);
     } else {
         setLoadingComp(true);
 
@@ -57,7 +57,7 @@ export default function LoginModal() {
         setLoadingComp(false);
       }, 2000);
 
-      console.log("ERR INPUT : ", inputs);
+      console.log("ERR DATA : ", inputs);
     }
   };
 

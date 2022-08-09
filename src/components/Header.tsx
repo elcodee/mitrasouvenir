@@ -87,7 +87,7 @@ export default function Header() {
                 <div className="mx-auto">
                   <a
                     className="navbar-brand d-inline-block mr-0 py-5"
-                    href="index.html"
+                    href="/"
                   >
                     <img
                       src="https://files.elcodee.com/mitrasouvenir/images/logo-black.png"

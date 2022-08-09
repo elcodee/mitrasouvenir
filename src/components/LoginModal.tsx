@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Input, Button, Text, Loading } from "@nextui-org/react";
-import { AiOutlineMail, AiOutlineKey, AiOutlineWarning } from "react-icons/ai";
+import { AiOutlineMail, AiOutlineKey, AiOutlineWarning, AiOutlineLock } from "react-icons/ai";
 
 export default function LoginModal() {
   const [visible, setVisible] = React.useState(false);
@@ -104,7 +104,7 @@ export default function LoginModal() {
             }}
             contentLeft={<AiOutlineMail />}
           />
-          <Input
+          <Input.Password
             clearable
             bordered
             fullWidth
@@ -116,7 +116,7 @@ export default function LoginModal() {
             onChange={(e) => {
               inputsHandler(e);
             }}
-            contentLeft={<AiOutlineKey />}
+            contentLeft={<AiOutlineLock />}
           />
         </Modal.Body>
         <Modal.Footer>

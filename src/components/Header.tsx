@@ -96,7 +96,15 @@ export default function Header() {
                 {/* <svg className="icon icon-user-light fs-28">
                   <use xlinkHref="#icon-user-light" />
                 </svg> */}
-                <LoginModal />
+                <a
+                            className="nav-link pr-3 py-0"
+                            href="https://mitrasouvenir-admin.vercel.app"
+                          >
+                            <svg className="icon icon-user-light">
+                              <use xlinkHref="#icon-user-light" />
+                            </svg>
+                            {/* <LoginModal /> */}
+                          </a>
               </div>
             </nav>
           </div>

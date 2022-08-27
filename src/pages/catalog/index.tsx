@@ -2,8 +2,27 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import PopUpModal from "./Modal";
 import { AiOutlineShoppingCart, AiOutlineEye } from "react-icons/ai";
+import useLogic from "./_Logic";
+import { useEffect, useState } from "react";
+import { Button, Loading, Row, Text } from "@nextui-org/react";
 
 export default function CatalogPage() {
+  const { loading, category, product, getProducts, getProductsByCategory } = useLogic();
+  const [data, setData] = useState<any>([])
+
+
+  const handleFilter = async (e: any) => {
+    // console.log("CAT : ", e);
+
+    await getProductsByCategory(e);
+  }
+
+  const handleResetFilter = async () => {
+    getProducts()
+  }
+
+  useEffect(() => {
+  }, [loading]);
   return (
     <>
       <div>
@@ -39,7 +58,7 @@ export default function CatalogPage() {
                 >
                   Kami Menemukan
                   <strong className="font-weight-bold text-secondary ml-2 mr-2">
-                    95
+                    {parseInt(product.length)}
                   </strong>
                   Produk Tersedia
                 </p>
@@ -62,15 +81,25 @@ export default function CatalogPage() {
                       className="dropdown-menu custom-dropdown-item"
                       aria-labelledby="dropdownMenuButton"
                     >
-                      <a className="dropdown-item" href="#">
-                        Tumblr
-                      </a>
-                      <a className="dropdown-item" href="#">
+                      <a className="dropdown-item" onClick={handleResetFilter}>
+                               Reset Filter...
+                              </a>
+                              <hr />
+                      {category
+                        ? category.map((item: any, index: any) => {
+                            return (
+                              <a className="dropdown-item" onClick={() => handleFilter(item._id)}>
+                                {item.name}
+                              </a>
+                            );
+                          })
+                        : null}
+                      {/* <a className="dropdown-item" href="#">
                         Mug
                       </a>
                       <a className="dropdown-item" href="#">
                         Glass
-                      </a>
+                      </a> */}
                     </div>
                   </div>
                 </div>
@@ -80,283 +109,69 @@ export default function CatalogPage() {
           <section className="mt-7">
             <div className="container container-xl">
               <div className="row">
-                <div className="col-xl-3 col-lg-4 col-md-6">
-                <div
-                    className="card border-0 product mb-6"
-                    data-animate="fadeInUp"
-                  >
-                     <a href="/product">
-                    <div className="position-relative">
-                      <img
-                        src="https://files.elcodee.com/mitrasouvenir/images/product-01.jpg"
-                        alt="Facial cleanser"
-                      />
-                      {/* <div className="card-img-overlay d-flex p-3">
+                {!loading ? (
+                  product.map((item: any, index: any) => {
+                    // console.log("ITEM : ", item);
+                    return (
+                      <div
+                        key={index + 1}
+                        className="col-xl-3 col-lg-4 col-md-6"
+                      >
+                        <div
+                          className="card border-0 product mb-6"
+                          // data-animate="fadeInUp"
+                        >
+                          <a href="/product">
+                            <div className="position-relative">
+                              <img src={item.prod_thumb} alt="Facial" />
+                              {/* <div className="card-img-overlay d-flex p-3">
                         <div>
                           <span className="badge badge-primary">-20%</span>
                         </div>
                       </div> */}
-                    </div>
-                    <div className="card-body pt-4 text-center">
-                      <p className="card-text font-weight-bold fs-16 mb-1 text-secondary">
-                        <span className="fs-13 font-weight-500 text-decoration-through text-body pr-1">
-                          $39.00
-                        </span>
-                        <span>$29.00</span>
-                      </p>
-                      <h2 className="card-title fs-15 font-weight-500 mb-2">
-                        Facial cleanser
-                      </h2>
-                      <div className="d-flex text-muted align-items-center justify-content-center flex-wrap">
-                      <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          20 <AiOutlineShoppingCart style={{ marginBottom: 2}} />
-                        </span>
-                        <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          180 <AiOutlineEye style={{ marginBottom: 2}} />
-                        </span>
+                            </div>
+                            <div className="card-body pt-4 text-center">
+                              <p className="card-text font-weight-bold fs-16 mb-1 text-secondary">
+                                {/* <span className="fs-13 font-weight-500 text-decoration-through text-body pr-1">
+                                $39.00
+                              </span> */}
+                                <span>
+                                  Rp{" "}
+                                  {parseInt(item.prod_price).toLocaleString(
+                                    "id"
+                                  )}
+                                </span>
+                              </p>
+                              <h2 className="card-title fs-15 font-weight-500 mb-2">
+                                {item.prod_category}
+                              </h2>
+                              <div className="d-flex text-muted align-items-center justify-content-center flex-wrap">
+                                <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
+                                  {parseInt(item.prod_sell).toLocaleString(
+                                    "id"
+                                  )}
+                                  <AiOutlineShoppingCart
+                                    style={{ marginBottom: 2 }}
+                                  />
+                                </span>
+                                <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
+                                  {parseInt(item.prod_see).toLocaleString("id")}{" "}
+                                  <AiOutlineEye style={{ marginBottom: 2 }} />
+                                </span>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
                       </div>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-lg-4 col-md-6">
-                <div
-                    className="card border-0 product mb-6"
-                    data-animate="fadeInUp"
-                  >
-                     <a href="/product">
-                    <div className="position-relative">
-                      <img
-                        src="https://files.elcodee.com/mitrasouvenir/images/product-02.jpg"
-                        alt="Bio-shroom Rejuvenating Serum"
-                      />
-                      <div className="card-img-overlay d-flex p-3">
-                        <div />
-                      </div>
-                    </div>
-                    <div className="card-body pt-4 text-center">
-                      <p className="card-text font-weight-bold fs-16 mb-1 text-secondary">
-                        <span>$29.00</span>
-                      </p>
-                      <h2 className="card-title fs-15 font-weight-500 mb-2">
-                          Bio-shroom Rejuvenating Serum
-                      </h2>
-                      <div className="d-flex text-muted align-items-center justify-content-center flex-wrap">
-                      <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          20 <AiOutlineShoppingCart style={{ marginBottom: 2}} />
-                        </span>
-                        <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          180 <AiOutlineEye style={{ marginBottom: 2}} />
-                        </span>
-                      </div>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-lg-4 col-md-6">
-                <div
-                    className="card border-0 product mb-6"
-                    data-animate="fadeInUp"
-                  >
-                     <a href="/product">
-                    <div className="position-relative">
-                      <img
-                        src="https://files.elcodee.com/mitrasouvenir/images/product-02.jpg"
-                        alt="Bio-shroom Rejuvenating Serum"
-                      />
-                      <div className="card-img-overlay d-flex p-3">
-                        <div />
-                      </div>
-                    </div>
-                    <div className="card-body pt-4 text-center">
-                      <p className="card-text font-weight-bold fs-16 mb-1 text-secondary">
-                        <span>$29.00</span>
-                      </p>
-                      <h2 className="card-title fs-15 font-weight-500 mb-2">
-                          Bio-shroom Rejuvenating Serum
-                      </h2>
-                      <div className="d-flex text-muted align-items-center justify-content-center flex-wrap">
-                      <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          20 <AiOutlineShoppingCart style={{ marginBottom: 2}} />
-                        </span>
-                        <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          180 <AiOutlineEye style={{ marginBottom: 2}} />
-                        </span>
-                      </div>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-lg-4 col-md-6">
-                <div
-                    className="card border-0 product mb-6"
-                    data-animate="fadeInUp"
-                  >
-                     <a href="/product">
-                    <div className="position-relative">
-                      <img
-                        src="https://files.elcodee.com/mitrasouvenir/images/product-02.jpg"
-                        alt="Bio-shroom Rejuvenating Serum"
-                      />
-                      <div className="card-img-overlay d-flex p-3">
-                        <div />
-                      </div>
-                    </div>
-                    <div className="card-body pt-4 text-center">
-                      <p className="card-text font-weight-bold fs-16 mb-1 text-secondary">
-                        <span>$29.00</span>
-                      </p>
-                      <h2 className="card-title fs-15 font-weight-500 mb-2">
-                          Bio-shroom Rejuvenating Serum
-                      </h2>
-                      <div className="d-flex text-muted align-items-center justify-content-center flex-wrap">
-                      <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          20 <AiOutlineShoppingCart style={{ marginBottom: 2}} />
-                        </span>
-                        <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          180 <AiOutlineEye style={{ marginBottom: 2}} />
-                        </span>
-                      </div>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-lg-4 col-md-6">
-                <div
-                    className="card border-0 product mb-6"
-                    data-animate="fadeInUp"
-                  >
-                     <a href="/product">
-                    <div className="position-relative">
-                      <img
-                        src="https://files.elcodee.com/mitrasouvenir/images/product-02.jpg"
-                        alt="Bio-shroom Rejuvenating Serum"
-                      />
-                      <div className="card-img-overlay d-flex p-3">
-                        <div />
-                      </div>
-                    </div>
-                    <div className="card-body pt-4 text-center">
-                      <p className="card-text font-weight-bold fs-16 mb-1 text-secondary">
-                        <span>$29.00</span>
-                      </p>
-                      <h2 className="card-title fs-15 font-weight-500 mb-2">
-                          Bio-shroom Rejuvenating Serum
-                      </h2>
-                      <div className="d-flex text-muted align-items-center justify-content-center flex-wrap">
-                      <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          20 <AiOutlineShoppingCart style={{ marginBottom: 2}} />
-                        </span>
-                        <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          180 <AiOutlineEye style={{ marginBottom: 2}} />
-                        </span>
-                      </div>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-lg-4 col-md-6">
-                <div
-                    className="card border-0 product mb-6"
-                    data-animate="fadeInUp"
-                  >
-                     <a href="/product">
-                    <div className="position-relative">
-                      <img
-                        src="https://files.elcodee.com/mitrasouvenir/images/product-02.jpg"
-                        alt="Bio-shroom Rejuvenating Serum"
-                      />
-                      <div className="card-img-overlay d-flex p-3">
-                        <div />
-                      </div>
-                    </div>
-                    <div className="card-body pt-4 text-center">
-                      <p className="card-text font-weight-bold fs-16 mb-1 text-secondary">
-                        <span>$29.00</span>
-                      </p>
-                      <h2 className="card-title fs-15 font-weight-500 mb-2">
-                          Bio-shroom Rejuvenating Serum
-                      </h2>
-                      <div className="d-flex text-muted align-items-center justify-content-center flex-wrap">
-                      <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          20 <AiOutlineShoppingCart style={{ marginBottom: 2}} />
-                        </span>
-                        <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          180 <AiOutlineEye style={{ marginBottom: 2}} />
-                        </span>
-                      </div>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-lg-4 col-md-6">
-                <div
-                    className="card border-0 product mb-6"
-                    data-animate="fadeInUp"
-                  >
-                     <a href="/product">
-                    <div className="position-relative">
-                      <img
-                        src="https://files.elcodee.com/mitrasouvenir/images/product-02.jpg"
-                        alt="Bio-shroom Rejuvenating Serum"
-                      />
-                      <div className="card-img-overlay d-flex p-3">
-                        <div />
-                      </div>
-                    </div>
-                    <div className="card-body pt-4 text-center">
-                      <p className="card-text font-weight-bold fs-16 mb-1 text-secondary">
-                        <span>$29.00</span>
-                      </p>
-                      <h2 className="card-title fs-15 font-weight-500 mb-2">
-                          Bio-shroom Rejuvenating Serum
-                      </h2>
-                      <div className="d-flex text-muted align-items-center justify-content-center flex-wrap">
-                      <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          20 <AiOutlineShoppingCart style={{ marginBottom: 2}} />
-                        </span>
-                        <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          180 <AiOutlineEye style={{ marginBottom: 2}} />
-                        </span>
-                      </div>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-lg-4 col-md-6">
-                <div
-                    className="card border-0 product mb-6"
-                    data-animate="fadeInUp"
-                  >
-                     <a href="/product">
-                    <div className="position-relative">
-                      <img
-                        src="https://files.elcodee.com/mitrasouvenir/images/product-02.jpg"
-                        alt="Bio-shroom Rejuvenating Serum"
-                      />
-                      <div className="card-img-overlay d-flex p-3">
-                        <div />
-                      </div>
-                    </div>
-                    <div className="card-body pt-4 text-center">
-                      <p className="card-text font-weight-bold fs-16 mb-1 text-secondary">
-                        <span>$29.00</span>
-                      </p>
-                      <h2 className="card-title fs-15 font-weight-500 mb-2">
-                          Bio-shroom Rejuvenating Serum
-                      </h2>
-                      <div className="d-flex text-muted align-items-center justify-content-center flex-wrap">
-                      <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          20 <AiOutlineShoppingCart style={{ marginBottom: 2}} />
-                        </span>
-                        <span className="card-text fs-14 font-weight-400 pl-2 lh-1">
-                          180 <AiOutlineEye style={{ marginBottom: 2}} />
-                        </span>
-                      </div>
-                    </div>
-                    </a>
-                  </div>
-                </div>
+                    );
+                  })
+                ) : (
+                  <>
+                    <Row justify="center" css={{ mb: 4 }}>
+                      <Loading type="spinner" size="xl" />
+                    </Row>
+                  </>
+                )}
               </div>
             </div>
           </section>

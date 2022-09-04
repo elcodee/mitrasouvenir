@@ -30,7 +30,7 @@ export default function Footer(){
               </div>
               <div className="col-12 col-lg-4 text-md-center order-1 order-lg-2">
                 <img
-                  src="https://files.elcodee.com/mitrasouvenir/images/logo-black-x1.png"
+                  src="https://files.elcodee.com/mitrasouvenir/images/ms-logo.png"
                   alt="Glowing"
                 />
               </div>

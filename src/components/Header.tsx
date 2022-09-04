@@ -53,7 +53,7 @@ export default function Header() {
                         href="/"
                       >
                         <img
-                          src="https://files.elcodee.com/mitrasouvenir/images/logo-black.png"
+                          src="https://files.elcodee.com/mitrasouvenir/images/ms-logo.png"
                           alt="Glowing"
                         />
                       </a>
@@ -91,7 +91,7 @@ export default function Header() {
                 <div className="mx-auto">
                   <a className="navbar-brand d-inline-block mr-0 py-5" href="/">
                     <img
-                      src="https://files.elcodee.com/mitrasouvenir/images/logo-black.png"
+                      src="https://files.elcodee.com/mitrasouvenir/images/ms-logo.png"
                       alt="Glowing"
                     />
                   </a>
@@ -122,7 +122,7 @@ export default function Header() {
           <div className="d-flex align-items-center card-header border-0 py-0 pl-8 pr-7 mb-9 bg-transparent">
             <a href="/" className="d-block w-179px">
               <img
-                src="https://files.elcodee.com/mitrasouvenir/images/logo-black.png"
+                src="https://files.elcodee.com/mitrasouvenir/images/ms-logo.png"
                 alt="Glowing"
               />
             </a>
